@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: ds-safety-whatsapp-agent
+    runtime: node
+    rootDir: whatsapp-agent
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /health
+    disk:
+      name: booking-data
+      mountPath: /var/data
+      sizeGB: 1
+    envVars:
+      - key: DATA_DIR
+        value: /var/data
+      - key: WHATSAPP_VERIFY_TOKEN
+        sync: false
+      - key: WHATSAPP_ACCESS_TOKEN
+        sync: false
+      - key: WHATSAPP_PHONE_NUMBER_ID
+        sync: false
+      - key: GRAPH_API_VERSION
+        value: v23.0
